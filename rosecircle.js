@@ -11,8 +11,18 @@ if (Meteor.isClient) {
     Template.addIntentionForm.events({
         'submit form': function(event) {
         event.preventDefault();
+
         var intentionName = event.target.intentionName.value;
-        IntencjeCollection.insert({name:intentionName,month:9,year:2015});
+        var monthNum = function(){
+            var date = new Date();
+            var nextMonth = date.getMonth();
+
+            if(nextMonth + 1 == 12){
+                return 0;
+            }
+            return nextMonth+1;
+        };
+        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015});
             event.target.intentionName.value = '';
         
         }
