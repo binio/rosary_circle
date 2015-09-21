@@ -5,6 +5,13 @@ if (Meteor.isClient) {
     Template.intentionList.helpers({
         'intentionList':function(){
         return IntencjeCollection.find();
+        },
+
+        'currentMonth':function(){
+            return "September";
+        },
+        'nextMonth':function(){
+            return "October";
         }
     });
     
@@ -28,6 +35,21 @@ if (Meteor.isClient) {
         }
     });
     
+    Template.intentionList.events({
+        'click .currentMonth':function(){
+            $('.currentMonthPanel').show();
+            $('a.nextMonth').parent().removeClass('active');
+            $('a.currentMonth').parent().addClass('active');
+            console.log("Current Month");
+        },
+        'click .nextMonth':function(){
+            $('.currentMonthPanel').hide();
+            $('a.nextMonth').parent().addClass('active');
+            $('a.currentMonth').parent().removeClass('active');
+            console.log("Next Month");
+        },
+    });
+
 }
 
 if (Meteor.isServer) {

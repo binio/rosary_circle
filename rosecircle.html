@@ -31,13 +31,21 @@
 
 
 <template name="intentionList">
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#" class="currentMonth">{{currentMonth}}</a></li>
+          <li role="presentation" ><a href="#" class="nextMonth">{{nextMonth}}</a></li>
+        </ul>
+    <div class="panel panel-default currentMonthPanel">
+        <div class="panel-body">
         <table class="table">
             <tbody>
             {{#each intentionList}}
             <tr><td>{{name}}</td></tr>
             {{/each}}
             </tbody>
-        </table>        
+        </table>
+        </div>
+    </div>
 </template>
 
 <template name="addIntentionForm">
