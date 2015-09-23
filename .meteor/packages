@@ -9,3 +9,5 @@ autopublish
 insecure
 mizzao:bootstrap-3
 iron:router
+accounts-password
+ian:accounts-ui-bootstrap-3
