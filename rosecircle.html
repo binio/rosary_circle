@@ -34,17 +34,31 @@
         <ul class="nav nav-tabs">
           <li role="presentation" class="active"><a href="#" class="currentMonth">{{currentMonth}}</a></li>
           <li role="presentation" ><a href="#" class="nextMonth">{{nextMonth}}</a></li>
+          <li role="presentation" ><a href="#">Wszytkie intencje</a></li>
         </ul>
     <div class="panel panel-default currentMonthPanel">
         <div class="panel-body">
         <table class="table">
             <tbody>
-            {{#each intentionList}}
+            {{#each intentionListCurrentMonth}}
             <tr><td>{{name}}</td></tr>
             {{/each}}
             </tbody>
         </table>
         </div>
+    </div>
+
+    <div class="panel panel-default nextMonthPanel hidden">
+        <div class="panel-body">
+        <table class="table">
+            <tbody>
+            {{#each intentionListNextMonth}}
+            <tr><td>{{name}}</td></tr>
+            {{/each}}
+            </tbody>
+        </table>
+        </div>
+        {{>addIntentionForm}}
     </div>
 </template>
 
