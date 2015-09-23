@@ -2,15 +2,16 @@ IntencjeCollection = new Mongo.Collection("intencje");
 
 if (Meteor.isClient) {
   moment.locale('pl');
+  accountsUIBootstrap3.setLanguage('pl'); // for Spanish
   // counter starts at 0
     Template.intentionList.helpers({
         'intentionListCurrentMonth':function(){
         var currentMonth = moment().endOf('month').month();
-        return IntencjeCollection.find({month:currentMonth});
+        return IntencjeCollection.find({month:currentMonth,user:Meteor.userId()});
         },
         'intentionListNextMonth':function(){
         var nextMonth = moment().add(1, 'months').endOf('month').month();
-        return IntencjeCollection.find({month:nextMonth});
+        return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
         },
 
         'currentMonth':function(){
@@ -37,7 +38,7 @@ if (Meteor.isClient) {
             }
             return nextMonth+1;
         };
-        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015});
+        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015,user:Meteor.userId()});
             event.target.intentionName.value = '';
         
         }
@@ -67,9 +68,9 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
     IntencjeCollection.remove({});  
-    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015});
-    IntencjeCollection.insert({name:"Moja druga intencja", month:9, year:2015});
-    IntencjeCollection.insert({name:"Moja trzecia intencja", month:9, year:2015});
-    IntencjeCollection.insert({name:"Moja trzecia intencja 8", month:8, year:2015});
+    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+    IntencjeCollection.insert({name:"Moja druga intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+    IntencjeCollection.insert({name:"Moja trzecia intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+    IntencjeCollection.insert({name:"Moja trzecia intencja 8", month:8, year:2015,user:'LpwPAk5YqxR7nPD8F'});
   });
 }
