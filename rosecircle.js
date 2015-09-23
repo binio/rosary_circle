@@ -1,6 +1,9 @@
 IntencjeCollection = new Mongo.Collection("intencje");
 
 if (Meteor.isClient) {
+  Accounts.ui.config({
+passwordSignupFields: 'USERNAME_ONLY'
+});
   moment.locale('pl');
   accountsUIBootstrap3.setLanguage('pl'); // for Spanish
   // counter starts at 0
