@@ -9,12 +9,16 @@ passwordSignupFields: 'USERNAME_ONLY'
   // counter starts at 0
     Template.intentionList.helpers({
         'intentionListCurrentMonth':function(){
-        var currentMonth = moment().endOf('month').month();
-        return IntencjeCollection.find({month:currentMonth,user:Meteor.userId()});
+            var currentMonth = moment().endOf('month').month();
+            return IntencjeCollection.find({month:currentMonth,user:Meteor.userId()});
         },
         'intentionListNextMonth':function(){
-        var nextMonth = moment().add(1, 'months').endOf('month').month();
-        return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
+            var nextMonth = moment().add(1, 'months').endOf('month').month();
+            return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
+        },
+        'intentionAllByUser':function(){
+            var currentMonth = moment().endOf('month').month();
+            return IntencjeCollection.find({});
         },
 
         'currentMonth':function(){
@@ -41,7 +45,7 @@ passwordSignupFields: 'USERNAME_ONLY'
             }
             return nextMonth+1;
         };
-        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015,user:Meteor.userId()});
+        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015,user:Meteor.userId(),username:Meteor.user().username});
             event.target.intentionName.value = '';
         
         }
@@ -51,17 +55,31 @@ passwordSignupFields: 'USERNAME_ONLY'
         'click .currentMonth':function(){
             $('.currentMonthPanel').show();
             $('.nextMonthPanel').hide();
+            $('.allByUserPanel').hide();
+            $('a.allByUser').parent().removeClass('active');
             $('a.nextMonth').parent().removeClass('active');
             $('a.currentMonth').parent().addClass('active');
             console.log("Current Month");
         },
         'click .nextMonth':function(){
             $('.currentMonthPanel').hide();
+            $('.allByUserPanel').hide();
             $('.nextMonthPanel').show();
             $('.nextMonthPanel').removeClass('hidden');
+            $('a.allByUser').parent().removeClass('active');
             $('a.nextMonth').parent().addClass('active');
             $('a.currentMonth').parent().removeClass('active');
             console.log("Next Month");
+        },
+
+        'click .allByUser':function(){
+            $('.allByUserPanel').show();
+            $('.currentMonthPanel').hide();
+            $('.nextMonthPanel').hide();
+            $('.allByUserPanel').removeClass('hidden');
+            $('a.nextMonth').parent().removeClass('active');
+            $('a.allByUser').parent().addClass('active');
+            console.log("All By User");
         },
     });
 
@@ -70,10 +88,10 @@ passwordSignupFields: 'USERNAME_ONLY'
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
-    IntencjeCollection.remove({});  
-    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
-    IntencjeCollection.insert({name:"Moja druga intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
-    IntencjeCollection.insert({name:"Moja trzecia intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
-    IntencjeCollection.insert({name:"Moja trzecia intencja 8", month:8, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+//    IntencjeCollection.remove({});
+//    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+//    IntencjeCollection.insert({name:"Moja druga intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+//    IntencjeCollection.insert({name:"Moja trzecia intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});
+//    IntencjeCollection.insert({name:"Moja trzecia intencja 8", month:8, year:2015,user:'LpwPAk5YqxR7nPD8F'});
   });
 }
