@@ -11,11 +11,11 @@
 
 <template name="tajemnice">
         <div class="panel panel-default tejemnicePanel">
-        <div class="panel-heading">Zameldowani na Pazdziernik</div>
+        <div class="panel-heading">Zameldowani na {{tajemnica.currentMonth}}</div>
         <div class="panel-body">
             <div class="btn-group">
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Zamelduj sie na Pazdziernik <span class="caret"></span>
+                Zamelduj sie na {{tajemnica.currentMonth}} <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
                 <li><a href="#">ZAMELDUJ</a></li>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="alert alert-success" role="alert">
-                <a href="#" class="alert-link">Jeszcze nie dołaczyles do rozanca na PAZDZIERNIK.</a>
+                <a href="#" class="alert-link">Jeszcze nie dołaczyles do rozanca na {{tajemnica.currentMonth}}.</a>
             </div>
         <table class="table">
             <tbody>

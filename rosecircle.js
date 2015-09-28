@@ -43,6 +43,14 @@ passwordSignupFields: 'USERNAME_ONLY'
         }
     });
     
+    Template.tajemnice.helpers({
+        'tajemnica':function(){
+            var tajemnica = new Object;
+            tajemnica.currentMonth = moment().add(1, 'months').endOf('month').format('MMMM');
+            return tajemnica;
+        }
+    });
+
     Template.addIntentionForm.events({
         'submit form': function(event) {
         event.preventDefault();
@@ -63,6 +71,10 @@ passwordSignupFields: 'USERNAME_ONLY'
         }
     });
     
+    Template.registerHelper('nextMonth', function() {
+        return moment().add(1, 'months').endOf('month').format('MMMM');
+    });
+
     Template.intentionList.events({
         'click .currentMonth':function(){
             $('.currentMonthPanel').show();
