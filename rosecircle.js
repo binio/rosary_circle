@@ -8,25 +8,37 @@ passwordSignupFields: 'USERNAME_ONLY'
   accountsUIBootstrap3.setLanguage('pl'); // for Spanish
   // counter starts at 0
     Template.intentionList.helpers({
+
         'intentionListCurrentMonth':function(){
             var currentMonth = moment().endOf('month').month();
             return IntencjeCollection.find({month:currentMonth,user:Meteor.userId()});
         },
+
         'intentionListNextMonth':function(){
             var nextMonth = moment().add(1, 'months').endOf('month').month();
             return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
         },
-        'intentionAllByUser':function(){
+
+        'usersByMonth':function(){
             var currentMonth = moment().endOf('month').month();
-            return IntencjeCollection.find({});
+            var distinctEntries = _.uniq(IntencjeCollection.find({month:currentMonth}, {
+            sort: {username: 1}, fields: {username: true}
+            }).fetch().map(function(x) {
+                return x.username;
+                }), true);
+            return distinctEntries;
+        },
+
+        'intentionByUser':function(userName){
+            var currentMonth = moment().endOf('month').month();
+            return IntencjeCollection.find({username:userName,month:currentMonth});
         },
 
         'currentMonth':function(){
-
             return moment().endOf('month').format('MMMM');
         },
-        'nextMonth':function(){
 
+        'nextMonth':function(){
             return moment().add(1, 'months').endOf('month').format('MMMM');
         }
     });

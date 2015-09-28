@@ -65,11 +65,18 @@
     </div>
 
     <div class="panel panel-default allByUserPanel hidden">
-        <div class="panel-body">123
+        <div class="panel-body">
         <table class="table">
             <tbody>
-            {{#each intentionAllByUser}}
-            <tr><td>{{name}}</td></tr>
+            {{#each usersByMonth}}
+                <tr><td><h3>{{this}}</h3>
+                    <ul>
+                        {{#each intentionByUser this}}
+                            <li>{{name}}</li>
+                        {{/each}}
+                    </ul>
+
+                </td></tr>
             {{/each}}
             </tbody>
         </table>
