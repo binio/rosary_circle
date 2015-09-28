@@ -4,7 +4,37 @@
         <div class="container">
 
       <div class="starter-template">
-          123
+          {{>tajemnice}}
       </div>
+    </div>
+</template>
+
+<template name="tajemnice">
+        <div class="panel panel-default tejemnicePanel">
+        <div class="panel-heading">Zameldowani na Pazdziernik</div>
+        <div class="panel-body">
+            <div class="btn-group">
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Zamelduj sie na Pazdziernik <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">ZAMELDUJ</a></li>
+              </ul>
+            </div>
+
+            <div class="alert alert-success" role="alert">
+                <a href="#" class="alert-link">Jeszcze nie dołaczyles do rozanca na PAZDZIERNIK.</a>
+            </div>
+        <table class="table">
+            <tbody>
+
+            <tr><td>1234</td></tr>
+            <tr><td>1234</td></tr>
+            <tr><td>1234</td></tr>
+            <tr><td>1234</td></tr>
+
+            </tbody>
+        </table>
+        </div>
     </div>
 </template>
