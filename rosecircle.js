@@ -1,4 +1,5 @@
 IntencjeCollection = new Mongo.Collection("intencje");
+PrzydzialyCollection = new Mongo.Collection("przydzialy");
 
 if (Meteor.isClient) {
   Accounts.ui.config({
@@ -43,13 +44,7 @@ passwordSignupFields: 'USERNAME_ONLY'
         }
     });
     
-    Template.tajemnice.helpers({
-        'tajemnica':function(){
-            var tajemnica = new Object;
-            tajemnica.currentMonth = moment().add(1, 'months').endOf('month').format('MMMM');
-            return tajemnica;
-        }
-    });
+
 
     Template.addIntentionForm.events({
         'submit form': function(event) {
@@ -57,15 +52,11 @@ passwordSignupFields: 'USERNAME_ONLY'
 
         var intentionName = event.target.intentionName.value;
         var monthNum = function(){
-            var date = new Date();
-            var nextMonth = date.getMonth();
 
-            if(nextMonth + 1 == 12){
-                return 0;
-            }
-            return nextMonth+1;
+            return Number(moment().add(1, 'months').endOf('month').month());
         };
-        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:2015,user:Meteor.userId(),username:Meteor.user().username});
+        var yearStr = moment().format("YYYY");
+        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:yearStr,user:Meteor.userId(),username:Meteor.user().username});
             event.target.intentionName.value = '';
         
         }
