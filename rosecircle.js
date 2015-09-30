@@ -61,6 +61,22 @@ passwordSignupFields: 'USERNAME_ONLY'
         
         }
     });
+    var deactivate = function(className){
+        $('.tajemnice').parent().removeClass('active');
+        $('.intencje').parent().removeClass('active');
+        $(className).parent().addClass('active');
+        };
+
+    Template.header.events({
+        'click .tajemnice':function(){
+            console.log('tajemnice')
+            deactivate('.tajemnice');
+        },
+        'click .intencje':function(){
+            console.log('intencje')
+            deactivate('.intencje');
+        },
+    });
     
     Template.registerHelper('nextMonth', function() {
         return moment().add(1, 'months').endOf('month').format('MMMM');
