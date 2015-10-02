@@ -22,9 +22,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/" class="intencje">Intencje</a></li>
-            <li><a href="/about" class="tajemnice">Tajemnice</a></li>
-            <li><a href="#contact" class="wiadomosci">Wiadomosci</a></li>
+            <li class="intencje {{getActive '.intencje'}}"><a href="/">Intencje</a></li>
+            <li class="tajemnice {{getActive '.tajemnice'}}"><a href="/about">Tajemnice</a></li>
+            <li><a href="#contact {{getActive '.wiadomosci'}}" class="wiadomosci">Wiadomosci</a></li>
               <li><a href="#">{{>loginButtons }}</a></li>
           </ul>
         </div><!--/.nav-collapse -->

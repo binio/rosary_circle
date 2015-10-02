@@ -44,6 +44,17 @@ passwordSignupFields: 'USERNAME_ONLY'
         }
     });
     
+    Template.header.helpers({
+        'getActive':function(l){
+            console.log(l);
+            var menu = Session.get('menu');
+            if(menu == l){
+                return 'active';
+            }
+            return;
+        }
+    });
+
 
 
     Template.addIntentionForm.events({
@@ -61,19 +72,18 @@ passwordSignupFields: 'USERNAME_ONLY'
         
         }
     });
+
     var deactivate = function(className){
-        $('.tajemnice').parent().removeClass('active');
-        $('.intencje').parent().removeClass('active');
-        $(className).parent().addClass('active');
+        Session.set('menu',className);
         };
 
     Template.header.events({
         'click .tajemnice':function(){
-            console.log('tajemnice')
+            console.log('tajemnice');
             deactivate('.tajemnice');
         },
         'click .intencje':function(){
-            console.log('intencje')
+            console.log('intencje');
             deactivate('.intencje');
         },
     });
