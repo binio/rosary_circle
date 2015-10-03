@@ -86,6 +86,10 @@ passwordSignupFields: 'USERNAME_ONLY'
             console.log('intencje');
             deactivate('.intencje');
         },
+        'click .wiadomosci':function(){
+            console.log('wiadomosci');
+            deactivate('.wiadomosci');
+        },
     });
     
     Template.registerHelper('nextMonth', function() {
