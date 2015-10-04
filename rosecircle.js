@@ -131,7 +131,39 @@ passwordSignupFields: 'USERNAME_ONLY'
 }
 
 if (Meteor.isServer) {
+
+var users = ["brandeisbluesky",
+"bialoglowa",
+"derayes",
+"corolla",
+"maria-magdalena",
+"jasminowa",
+"skala",
+"mindmonkey",
+"ja",
+"bergamotka",
+"maly-ksiaze",
+"metanoja",
+"sahcim",
+"agrafon",
+"zuska",
+"marianna",
+"rozyczka",
+"kolor",
+"castorian",
+"katolickamama",
+"agniecha"];
+
   Meteor.startup(function () {
+      if(Meteor.users.find().count()==1) {
+          for(i = 0; i < users.length; i++){
+            var options ={
+            email: users[i]+'@example.com',
+            username:users[i],
+            password: 'pass'}
+                Accounts.createUser(options)
+          }
+      }
     // code to run on server at startup
 //    IntencjeCollection.remove({});
 //    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});

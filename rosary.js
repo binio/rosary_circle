@@ -1,0 +1,22 @@
+var rosaryArray  = [
+"Radosna - Zwiastowanie",
+"Radosna - Nawiedzenie Elżbiety",
+"Radosna - Narodziny Jezusa",
+"Radosna - Ofiarowanie Jezusa",
+"Radosna - Odnalezienie Jezusa",
+"Chwalebna - Zwartwychwstanie",
+"Chwalebna - Wniebowstąpienie",
+"Chwalebna - Zesłanie Ducha Świętego",
+"Chwalebna - Wniebowzięcie NMP",
+"Chwalebna - Ukoronowanie NMP",
+"Bolesna - Modlitwa w ogrójcu",
+"Bolesna - Biczowanie",
+"Bolesna - Cierniem koronowanie",
+"Bolesna - Droga krzyżowa",
+"Bolesna - Śmierć na krzyżu",
+"Światła - Chrzest Jezusa",
+"Światła - Objawienie na weselu",
+"Światła - Wzywanie do nawrócenia",
+"Światła - Przemie nienie na górze Tabor",
+"Światła - Ustanowienie Eucharystii"
+];
