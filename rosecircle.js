@@ -8,6 +8,7 @@ passwordSignupFields: 'USERNAME_ONLY'
   moment.locale('pl');
   accountsUIBootstrap3.setLanguage('pl'); // for Spanish
   // counter starts at 0
+    Meteor.subscribe('intentionListCurrentMonth');
     Template.intentionList.helpers({
 
         'intentionListCurrentMonth':function(){
@@ -132,6 +133,11 @@ passwordSignupFields: 'USERNAME_ONLY'
 
 if (Meteor.isServer) {
 
+    Meteor.publish('intentionListCurrentMonth',function(){
+            var currentMonth = moment().endOf('month').month();
+            var nextMonth = moment().add(1, 'months').endOf('month').month();
+            return IntencjeCollection.find({$or: [ { month: { $eq: currentMonth } }, { month: { $eq: nextMonth } }]});
+        });
 var users = ["brandeisbluesky",
 "bialoglowa",
 "derayes",

@@ -5,10 +5,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 mizzao:bootstrap-3
 iron:router
 accounts-password
 ian:accounts-ui-bootstrap-3
 meteorhacks:aggregate
+mrt:moment
