@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+    Meteor.subscribe('tajemniceTwoMonths');
 
     Template.tajemnice.helpers({
         'tajemnica':function(){
@@ -6,6 +7,9 @@ if (Meteor.isClient) {
             if(Meteor.userId()){
                 var monthNum = moment().add(1, 'months').endOf('month').month();
                 var yearNum = moment().add(1, 'months').endOf('month').year();
+                var currMonthNum = moment().endOf('month').month();
+                var currYearNum = moment().endOf('month').year();
+
                 tajemnica.joinNextMonth = PrzydzialyCollection.find({
                     username:Meteor.user().username,
                     month:monthNum
@@ -18,7 +22,9 @@ if (Meteor.isClient) {
                 }
 
                 tajemnica.currentMonth = moment().add(1, 'months').endOf('month').format('MMMM');
+                tajemnica.nextMonth = moment().endOf('month').format('MMMM');
                 tajemnica.registeredNextMonth = PrzydzialyCollection.find({month:monthNum,year:yearNum});
+                tajemnica.registeredCurrentMonth = PrzydzialyCollection.find({month:currMonthNum,year:currYearNum});
             }
             return tajemnica;
         }
@@ -37,4 +43,10 @@ if (Meteor.isClient) {
     });
 }
 
-if(Meteor.isServer){}
+if(Meteor.isServer){
+    Meteor.publish('tajemniceTwoMonths', function(){
+        var currentMonth = moment().endOf('month').month();
+        var nextMonth = moment().add(1, 'months').endOf('month').month();
+        return PrzydzialyCollection.find({$or: [ { month: { $eq: currentMonth } }, { month: { $eq: nextMonth } }]});
+    });
+}

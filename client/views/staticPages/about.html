@@ -29,6 +29,8 @@
             </div>
             {{/if}}
             {{/if}}
+
+
         <table class="table">
             <tbody>
             {{#each tajemnica.registeredNextMonth}}
@@ -37,6 +39,20 @@
 
             </tbody>
         </table>
+
+
         </div>
     </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Zameldowani na {{tajemnica.nextMonth}}</div>
+                    <table class="table">
+                        <tbody>
+                        {{#each tajemnica.registeredCurrentMonth}}
+                        <tr><td>{{username}}</td></tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+            </div>
 </template>
