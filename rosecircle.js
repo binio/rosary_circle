@@ -59,6 +59,7 @@ passwordSignupFields: 'USERNAME_ONLY'
 
     Template.intentionList.events({
         'click .deleteIntention':function(){
+            Meteor.call('deleteIntention',this);
             console.log(this._id);
         }
     });
@@ -72,7 +73,13 @@ passwordSignupFields: 'USERNAME_ONLY'
             return Number(moment().add(1, 'months').endOf('month').month());
         };
         var yearStr = moment().format("YYYY");
-        IntencjeCollection.insert({name:intentionName,month:monthNum(),year:yearStr,user:Meteor.userId(),username:Meteor.user().username});
+        Meteor.call('addIntention',{
+            name:intentionName,
+            month:monthNum(),
+            year:yearStr,
+            user:Meteor.userId(),
+            username:Meteor.user().username}
+        );
             event.target.intentionName.value = '';
         
         }
@@ -175,6 +182,27 @@ var users = ["brandeisbluesky",
                 Accounts.createUser(options)
           }
       }
+    Meteor.methods({
+        'deleteIntention':function(intention){
+            IntencjeCollection.remove(intention._id);
+        },
+        'addIntention':function(data){
+            check(data, {
+                name: String,
+                user: String,
+                username: String,
+                month: Number,
+                year: String
+            });
+
+            if(!this.userId){
+                throw new Meteor.Error('You have to login');
+            }
+
+                IntencjeCollection.insert(data);
+
+        }
+    });
     // code to run on server at startup
 //    IntencjeCollection.remove({});
 //    IntencjeCollection.insert({name:"Moja pierwsza intencja", month:9, year:2015,user:'LpwPAk5YqxR7nPD8F'});

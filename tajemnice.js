@@ -34,7 +34,7 @@ if (Meteor.isClient) {
         'click .join':function(){
             var monthNum = moment().add(1, 'months').endOf('month').month();
             var yearNum = moment().add(1, 'months').endOf('month').year();
-            PrzydzialyCollection.insert({
+            Meteor.call('joinMonth',{
                 username:Meteor.user().username,
                 month:monthNum,
                 year:yearNum
@@ -48,5 +48,14 @@ if(Meteor.isServer){
         var currentMonth = moment().endOf('month').month();
         var nextMonth = moment().add(1, 'months').endOf('month').month();
         return PrzydzialyCollection.find({$or: [ { month: { $eq: currentMonth } }, { month: { $eq: nextMonth } }]});
+    });
+
+    Meteor.methods({
+        'joinMonth':function(data){
+            if(!this.userId){
+                throw new Meteor.Error('You have to login');
+            }
+            PrzydzialyCollection.insert(data);
+        }
     });
 }
