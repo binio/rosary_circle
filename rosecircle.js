@@ -57,7 +57,11 @@ passwordSignupFields: 'USERNAME_ONLY'
     });
 
 
-
+    Template.intentionList.events({
+        'click .deleteIntention':function(){
+            console.log(this._id);
+        }
+    });
     Template.addIntentionForm.events({
         'submit form': function(event) {
         event.preventDefault();
