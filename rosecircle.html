@@ -25,7 +25,7 @@
             <li class="intencje {{getActive '.intencje'}}"><a href="/">Intencje</a></li>
             {{#if currentUser}}
             <li class="tajemnice {{getActive '.tajemnice'}}"><a href="/about">Tajemnice</a></li>
-            <li class="wiadomosci {{getActive '.wiadomosci'}}"><a href="#contact">Wiadomosci</a></li>
+            <li class="wiadomosci {{getActive '.wiadomosci'}}"><a href="/most">Most modlitewny</a></li>
             {{/if}}
               <li><a href="#">{{>loginButtons }}</a></li>
           </ul>
@@ -37,19 +37,26 @@
 
 <template name="intentionList">
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="#" class="currentMonth">{{currentMonth}}</a></li>
-          <li role="presentation" ><a href="#" class="nextMonth">{{nextMonth}}</a></li>
-          <li role="presentation" ><a href="#" class="allByUser">Wszytkie intencje</a></li>
+          <li role="presentation" class="active"><a href="#" class="currentMonth">Nasze intencje - {{nextMonth}}</a></li>
+          <li role="presentation" ><a href="#" class="nextMonth">Moje - {{nextMonth}}</a></li>
+          <li role="presentation" ><a href="#" class="allByUser">Nasze intencje - {{currentMonth}}</a></li>
         </ul>
     <div class="panel panel-default currentMonthPanel">
         <div class="panel-body">
-        <table class="table">
-            <tbody>
-            {{#each intentionListCurrentMonth}}
-            <tr><td>{{name}}</td></tr>
-            {{/each}}
-            </tbody>
-        </table>
+            <table class="table">
+                <tbody>
+                {{#each usersByMonth nextMonthNum}}
+                    <tr><td><h3>{{this}}</h3>
+                        <ul>
+                            {{#each intentionByUser this nextMonthNum}}
+                                <li>{{name}}</li>
+                            {{/each}}
+                        </ul>
+
+                    </td></tr>
+                {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -68,20 +75,20 @@
 
     <div class="panel panel-default allByUserPanel hidden">
         <div class="panel-body">
-        <table class="table">
-            <tbody>
-            {{#each usersByMonth}}
-                <tr><td><h3>{{this}}</h3>
-                    <ul>
-                        {{#each intentionByUser this}}
-                            <li>{{name}}</li>
-                        {{/each}}
-                    </ul>
+            <table class="table">
+                <tbody>
+                {{#each usersByMonth currentMonthNum}}
+                    <tr><td><h3>{{this}}</h3>
+                        <ul>
+                            {{#each intentionByUser this currentMonthNum}}
+                                <li>{{name}}</li>
+                            {{/each}}
+                        </ul>
 
-                </td></tr>
-            {{/each}}
-            </tbody>
-        </table>
+                    </td></tr>
+                {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 </template>

@@ -47,7 +47,7 @@ if(Meteor.isServer){
     Meteor.publish('tajemniceTwoMonths', function(){
         var currentMonth = moment().endOf('month').month();
         var nextMonth = moment().add(1, 'months').endOf('month').month();
-        return PrzydzialyCollection.find({$or: [ { month: { $eq: currentMonth } }, { month: { $eq: nextMonth } }]});
+        return PrzydzialyCollection.find({$or: [ { month: currentMonth  }, { month: nextMonth}]});
     });
 
     Meteor.methods({

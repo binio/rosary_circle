@@ -21,8 +21,8 @@ passwordSignupFields: 'USERNAME_ONLY'
             return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
         },
 
-        'usersByMonth':function(){
-            var currentMonth = moment().endOf('month').month();
+        'usersByMonth':function(month){
+            var currentMonth = month;
             var distinctEntries = _.uniq(IntencjeCollection.find({month:currentMonth}, {
             sort: {username: 1}, fields: {username: true}
             }).fetch().map(function(x) {
@@ -31,9 +31,8 @@ passwordSignupFields: 'USERNAME_ONLY'
             return distinctEntries;
         },
 
-        'intentionByUser':function(userName){
-            var currentMonth = moment().endOf('month').month();
-            return IntencjeCollection.find({username:userName,month:currentMonth});
+        'intentionByUser':function(userName, month){
+            return IntencjeCollection.find({username:userName,month:month});
         },
 
         'currentMonth':function(){
@@ -42,6 +41,14 @@ passwordSignupFields: 'USERNAME_ONLY'
 
         'nextMonth':function(){
             return moment().add(1, 'months').endOf('month').format('MMMM');
+        },
+
+        'currentMonthNum':function(){
+            return moment().endOf('month').month();
+        },
+
+        'nextMonthNum':function(){
+            return moment().add(1, 'months').endOf('month').month();
         }
     });
     
@@ -54,6 +61,7 @@ passwordSignupFields: 'USERNAME_ONLY'
             }
             return;
         }
+
     });
 
 
@@ -140,6 +148,28 @@ passwordSignupFields: 'USERNAME_ONLY'
         },
     });
 
+    Meteor.methods({
+        'deleteIntention':function(intention){
+            IntencjeCollection.remove(intention._id);
+        },
+        'addIntention':function(data){
+            check(data, {
+                name: String,
+                user: String,
+                username: String,
+                month: Number,
+                year: String
+            });
+
+            if(!this.userId){
+                throw new Meteor.Error('You have to login');
+            }
+
+                IntencjeCollection.insert(data);
+
+        }
+    });
+
 }
 
 if (Meteor.isServer) {
@@ -147,7 +177,8 @@ if (Meteor.isServer) {
     Meteor.publish('intentionListTwoMonths',function(){
             var currentMonth = moment().endOf('month').month();
             var nextMonth = moment().add(1, 'months').endOf('month').month();
-            return IntencjeCollection.find({$or: [ { month: { $eq: currentMonth } }, { month: { $eq: nextMonth } }]});
+            return IntencjeCollection.find({$or: [ { month: currentMonth }, { month: nextMonth }]});
+
         });
 var users = ["brandeisbluesky",
 "bialoglowa",
