@@ -26,7 +26,7 @@ if (Meteor.isClient) {
         },
 
         'formatTime':function(isoDate){
-            return moment(isoDate).format('HH:mm');
+            return moment(isoDate).format('DD MMMM YYYY HH:mm');
         }
     });
 
@@ -55,6 +55,8 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('prayers',function(){
-        return PrayersCollection.find();
+        var sevenDays = -7;
+        var weekAgo = new Date(moment().add(sevenDays, 'days').toISOString());
+        return PrayersCollection.find({'joined':{$gte:weekAgo}});
     });
 }
