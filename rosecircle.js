@@ -210,8 +210,9 @@ var users = ["brandeisbluesky",
             email: users[i]+'@example.com',
             username:users[i],
             password: 'pass'}
-                Accounts.createUser(options)
+                
           }
+          
       }
     Meteor.methods({
         'deleteIntention':function(intention){
