@@ -8,6 +8,16 @@ passwordSignupFields: 'USERNAME_ONLY'
   moment.locale('pl');
   accountsUIBootstrap3.setLanguage('pl'); // for Spanish
   // counter starts at 0
+
+        Tracker.autorun(function(){
+            if(Meteor.userId()){
+            //do your stuff
+                if(Meteor.user()){
+                    var user = Meteor.user();
+                    Session.set('currentUser', user.username);
+                }
+            }
+        });
     Meteor.subscribe('intentionListTwoMonths');
     Template.intentionList.helpers({
 

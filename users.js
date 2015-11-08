@@ -5,7 +5,7 @@ if (Meteor.isClient) {
     //Meteor.subscribe('users',{username:Meteor.user().username});
     Tracker.autorun(function(computation){
         Meteor.subscribe('users', {
-            username: Meteor.user().username
+            username: Session.get('currentUser')
         });
     });
 
@@ -20,10 +20,10 @@ if (Meteor.isServer) {
 
     Meteor.publish('users', function(options){
         if(options.username == 'tomasz-tomasz'){
-            return Meteor.users.find({});
+            return Meteor.users.find({$query:{}, $orderby:{username:1}});
         }
         else {
-            return {};
+            return Meteor.users.find({username:"xxxx"});
         }
         });
 

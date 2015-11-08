@@ -7,11 +7,11 @@
       </div>
     </div>
 </template>
-<template name="me">dfghdfghdfgh
+<template name="me">
 <ul class="list-group">
 {{#each allUsers}}
     <li class="list-group-item">
-    <a href="#">{{username}}</a>
+    <a href="user/{{_id}}">{{username}}  <span class="glyphicon glyphicon-edit"></span></a>
     </li>
 {{/each}}
 </ul>
