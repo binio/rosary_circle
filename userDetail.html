@@ -1,0 +1,14 @@
+<template name="userDetail">
+    <div class="container">
+
+      <div class="starter-template">
+          <ul class="list-group">
+          <li class="list-group-item">Uzytkownik:{{username}}</li>
+
+          {{#each emails}}
+            <li class="list-group-item">email: {{address}}</li>
+          {{/each}}
+          </ul>
+      </div>
+    </div>
+</template>
