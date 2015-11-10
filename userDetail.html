@@ -2,15 +2,17 @@
     <div class="container">
 
       <div class="starter-template">
-          <ul class="list-group">
+          <ul class="list-group user-detail">
           <li class="list-group-item">Uzytkownik:{{username}}</li>
 
           {{#each emails}}
             <li class="list-group-item">email: {{address}}</li>
           {{/each}}
+              {{#if isInRole 'admin' 'group-1'}}
               <li class="list-group-item"><input type="checkbox" class="admin"> admin</li>
               <li class="list-group-item"><input type="checkbox" class="user"> user</li>
               <li class="list-group-item"><input type="checkbox" class="priest"> priest</li>
+              {{/if}}
           </ul>
       </div>
     </div>
