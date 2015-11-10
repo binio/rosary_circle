@@ -2,8 +2,11 @@ if (Meteor.isClient) {
     Template.userDetail.events({
         'click .admin':function(){
             //@TODO First check if current user is admin
-            Meteor.call('addAdmin',this._id);
+            //Meteor.call('addAdmin',this._id);
             console.log(this._id);
+            if(Roles.userIsInRole(this._id, ['admin','user'], 'group-1')){
+            console.log('has admin');
+            }
         }
     });
 }
