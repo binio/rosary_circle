@@ -9,9 +9,9 @@
             <li class="list-group-item">email: {{address}}</li>
           {{/each}}
               {{#if isInRole 'admin' 'group-1'}}
-              <li class="list-group-item"><input type="checkbox" class="admin"> admin</li>
-              <li class="list-group-item"><input type="checkbox" class="user"> user</li>
-              <li class="list-group-item"><input type="checkbox" class="priest"> priest</li>
+              <li class="list-group-item"><input type="checkbox" class="admin" {{checks.adminCheck}}> admin</li>
+              <li class="list-group-item"><input type="checkbox" class="user" {{checks.userCheck}}> user</li>
+              <li class="list-group-item"><input type="checkbox" class="priest" {{checks.priestCheck}}> priest</li>
               {{/if}}
           </ul>
 
