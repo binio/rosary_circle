@@ -14,6 +14,17 @@
               <li class="list-group-item"><input type="checkbox" class="priest"> priest</li>
               {{/if}}
           </ul>
+
       </div>
     </div>
+    {{>blurp}}
+    {{#each userroles }}
+      {{this}}
+    {{/each}}
+</template>
+
+<template name="blurp">0
+    {{#each userroles}}
+      {{this}}
+    {{/each}}0
 </template>
