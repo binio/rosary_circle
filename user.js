@@ -39,7 +39,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.userDetail.helpers({
+    Template.adminForm.helpers({
         'checks':function(){
             var roles = Session.get('userRoles');
             console.log(roles);

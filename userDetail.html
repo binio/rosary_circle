@@ -14,7 +14,7 @@
               <li class="list-group-item"><input type="checkbox" class="priest" {{checks.priestCheck}}> priest</li>
               {{/if}}
           </ul>
-
+{{>adminForm}}
       </div>
     </div>
     {{>blurp}}
@@ -27,4 +27,20 @@
     {{#each userroles}}
       {{this}}
     {{/each}}0
+</template>
+
+<template name="adminForm">
+<form>
+
+    <div class="input-group">
+    <ul class="list-group user-detail">
+      <li class="list-group-item"><input type="checkbox" class="admin" {{checks.adminCheck}}> admin</li>
+      <li class="list-group-item"><input type="checkbox" class="user" {{checks.userCheck}}> user</li>
+      <li class="list-group-item"><input type="checkbox" class="priest" {{checks.priestCheck}}> priest</li>
+        </ul>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Dodaj!</button>
+      </span>
+    </div><!-- /input-group -->
+</form>
 </template>
