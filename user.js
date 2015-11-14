@@ -3,19 +3,19 @@ if (Meteor.isClient) {
     Template.userDetail.events({
         'click .admin':function(){
             //@TODO First check if current user is admin
-            Meteor.call('addRole',this._id, ['admin'], 'group-1');
+            //Meteor.call('addRole',this._id, ['admin'], 'group-1');
             if(Roles.userIsInRole(this._id, ['admin'], 'group-1')){
             console.log('has admin');
             }
         },
         'click .user':function(){
-            Meteor.call('addRole',this._id, ['user'], 'group-1');
+            //Meteor.call('addRole',this._id, ['user'], 'group-1');
             if(Roles.userIsInRole(this._id, ['user'], 'group-1')){
             console.log('has user');
             }
         },
         'click .priest':function(){
-            Meteor.call('addRole',this._id, ['priest'], 'group-1');
+            //Meteor.call('addRole',this._id, ['priest'], 'group-1');
             if(Roles.userIsInRole(this._id, ['priest'], 'group-1')){
             console.log('has priest');
             }
@@ -57,6 +57,24 @@ if (Meteor.isClient) {
             return checks;
         }
     });
+
+    Template.adminForm.events({
+        'submit form': function(event) {
+            event.preventDefault();
+            var roles = [];
+            if(event.target.admin.checked){
+                roles.push('admin');
+            }
+            if(event.target.user.checked){
+                roles.push('user');
+            }
+            if(event.target.priest.checked){
+                roles.push('priest');
+            }
+            Meteor.call('setRoles',this._id,roles,'group-1');
+        }
+    });
+
 }
 if (Meteor.isServer) {
     Meteor.methods({
@@ -79,7 +97,15 @@ if (Meteor.isServer) {
             roles.push("priest");
          }
          return roles;
-     }
+     },
+
+    'setRoles':function(id,roles, group){
+        var loggedInUser = Meteor.user();
+        if (!loggedInUser || !Roles.userIsInRole(loggedInUser, ['admin'], 'group-1')) {
+                throw new Meteor.Error(403, "Access denied")
+            }
+        Roles.setUserRoles(id, roles, group)
+    }
     });
 
 }
