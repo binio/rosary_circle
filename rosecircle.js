@@ -18,6 +18,7 @@ passwordSignupFields: 'USERNAME_ONLY'
                 }
             }
         });
+    Session.set('userRoles',[]);
     Meteor.subscribe('intentionListTwoMonths');
     Template.intentionList.helpers({
 
