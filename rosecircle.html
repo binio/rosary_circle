@@ -43,6 +43,9 @@
         </ul>
     <div class="panel panel-default currentMonthPanel">
         <div class="panel-body">
+        <div class="panel-body nextMonthBlessing">
+            {{#if nextMonthBlessing}}{{nextMonthBlessing.text}}{{/if}}
+        </div>
             <table class="table">
                 <tbody>
                 {{#each usersByMonth nextMonthNum}}
@@ -75,6 +78,9 @@
 
     <div class="panel panel-default allByUserPanel hidden">
         <div class="panel-body">
+            <div class="panel-body currentMonthBlessing">
+                {{#if currentMonthBlessing}}{{currentMonthBlessing.text}}{{/if}}
+            </div>
             <table class="table">
                 <tbody>
                 {{#each usersByMonth currentMonthNum}}
