@@ -19,6 +19,9 @@ passwordSignupFields: 'USERNAME_ONLY'
             }
         });
     Session.set('userRoles',[]);
+    Session.set('currentMonthBlessing','');
+    Session.set('nextMonthBlessing','');
+
     Meteor.subscribe('intentionListTwoMonths');
     Template.intentionList.helpers({
 
@@ -60,7 +63,19 @@ passwordSignupFields: 'USERNAME_ONLY'
 
         'nextMonthNum':function(){
             return moment().add(1, 'months').endOf('month').month();
-        }
+        },
+        'currentMonthBlessing':function(){
+            Meteor.call('getBlessing',MyApp.currentMonth(),moment().format("YYYY"), function(error,result){
+                        Session.set('currentMonthBlessing',result);
+                        });
+            return Session.get('currentMonthBlessing');
+        },
+        'nextMonthBlessing':function(){
+            Meteor.call('getBlessing',MyApp.nextMonth(),MyApp.yearNextMonth(), function(error,result){
+                        Session.set('nextMonthBlessing',result);
+                        });
+            return Session.get('nextMonthBlessing');
+        },
     });
     
     Template.header.helpers({
@@ -110,15 +125,15 @@ passwordSignupFields: 'USERNAME_ONLY'
 
     Template.header.events({
         'click .tajemnice':function(){
-            console.log('tajemnice');
+            //console.log('tajemnice');
             deactivate('.tajemnice');
         },
         'click .intencje':function(){
-            console.log('intencje');
+            //console.log('intencje');
             deactivate('.intencje');
         },
         'click .wiadomosci':function(){
-            console.log('wiadomosci');
+            //console.log('wiadomosci');
             deactivate('.wiadomosci');
         },
     });
@@ -135,7 +150,7 @@ passwordSignupFields: 'USERNAME_ONLY'
             $('a.allByUser').parent().removeClass('active');
             $('a.nextMonth').parent().removeClass('active');
             $('a.currentMonth').parent().addClass('active');
-            console.log("Current Month");
+            //console.log("Current Month");
         },
         'click .nextMonth':function(){
             $('.currentMonthPanel').hide();
@@ -145,7 +160,7 @@ passwordSignupFields: 'USERNAME_ONLY'
             $('a.allByUser').parent().removeClass('active');
             $('a.nextMonth').parent().addClass('active');
             $('a.currentMonth').parent().removeClass('active');
-            console.log("Next Month");
+            //console.log("Next Month");
         },
 
         'click .allByUser':function(){
@@ -155,7 +170,7 @@ passwordSignupFields: 'USERNAME_ONLY'
             $('.allByUserPanel').removeClass('hidden');
             $('a.nextMonth').parent().removeClass('active');
             $('a.allByUser').parent().addClass('active');
-            console.log("All By User");
+            //console.log("All By User");
         },
     });
 
