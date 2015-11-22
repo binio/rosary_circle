@@ -10,8 +10,8 @@ if (Meteor.isClient) {
             event.preventDefault();
             console.log(event.target.blessingText.value);
             var blessing = event.target.blessingText.value;
-            var month = 11;
-            var year = 2015;
+            var month = MyApp.nextMonth();
+            var year = MyApp.yearNextMonth();
             var group = 'group-1';
             Meteor.call('addBlessing',blessing, month, year, group);
         }
@@ -29,6 +29,13 @@ if (Meteor.isServer) {
             blessingObj.user = user._id;
             BlessCollection.remove({month:month, year:year, user:user._id});
             BlessCollection.insert(blessingObj);
+        },
+        'getBlessing':function(monthNum, yearStr){
+            var blessing = new Object;
+            blessing.month = monthNum;
+            blessing.year = yearStr;
+            return  BlessCollection.findOne(blessing);
+
         }
     });
 
