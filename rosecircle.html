@@ -26,8 +26,26 @@
             {{#if currentUser}}
             <li class="tajemnice {{getActive '.tajemnice'}}"><a href="/about">Tajemnice</a></li>
             <li class="wiadomosci {{getActive '.wiadomosci'}}"><a href="/most">Most modlitewny</a></li>
+
             {{/if}}
               <li><a href="#">{{>loginButtons }}</a></li>
+              {{#if isInRole 'admin' 'group-1'}}
+              <li><a>
+                  <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          Panel Administratracji
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="/users">Urzytkownicy</a></li>
+                          <li><a href="#">Meldunki</a></li>
+                          <li><a href="#">Przydziały</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                      </ul>
+                  </div>
+              </a></li>
+              {{/if}}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
