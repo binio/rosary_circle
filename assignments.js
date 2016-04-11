@@ -1,4 +1,4 @@
-AssignmentsCollection = new Mongo.Collection("assignments");
+//User assignments for users so they can see what they have been assigned for curent month.
 
 if (Meteor.isClient) {
     Meteor.subscribe('userAssignment');
@@ -9,8 +9,6 @@ if (Meteor.isClient) {
             Meteor.call('getAssignment',Meteor.userId(),MyApp.currentMonth(), function(error,result){
                 Session.set('userAssignment',result);
             });
-            console.log('USER ID'+Meteor.userId());
-            console.log(Session.get('userAssignment'));
             return Session.get('userAssignment');
         },
     });
@@ -19,16 +17,16 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.publish('userAssignment',function(){
-        return AssignmentsCollection.find({});
+        return PrzydzialyCollection.find({});
 
     });
 
     Meteor.methods({
         'getAssignment':function(user,monthNum){
             var a = new Object;
-            //a.month = monthNum;
+            a.month = monthNum;
             a.userId = user
-            return  AssignmentsCollection.findOne(a);
+            return  PrzydzialyCollection.findOne(a);
         }
     });
 
