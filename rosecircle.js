@@ -141,6 +141,9 @@ passwordSignupFields: 'USERNAME_ONLY'
     Template.registerHelper('nextMonth', function() {
         return moment().add(1, 'months').endOf('month').format('MMMM');
     });
+    Template.registerHelper('currentMonth', function() {
+        return moment().endOf('month').format('MMMM');
+    });
 
     Template.intentionList.events({
         'click .currentMonth':function(){

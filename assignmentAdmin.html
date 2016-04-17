@@ -1,10 +1,9 @@
 <template name="assignmentAdmin">
     <div class="container">
-
         <div class="starter-template">
             <div class="alert alert-info" role="alert">
                 Tutaj mozesz przypisac tajemnice do użytkowników na <b>{{nextMonth}}</b>.
-                oraz na bierzący miesiąc.
+                oraz na <b>{{currentMonth}}</b>.
             </div>
             {{>assignmentList}}
         </div>
@@ -13,12 +12,133 @@
 
 
 <template name="assignmentList">
-    {{#each usersByMonth 3}}
+    <table class="table table-striped">
+        <thead>
+        <th><b>Meldunki {{currentMonth}}</b></th>
+        </thead>
+        <tbody>
+    {{#each usersByCurrentMonth}}
     <tr>
         <td>
-            <h3>{{this}}</h3>
+            <h3>{{this.username}}</h3>
+            <ul>
+            {{#each this.part}}
+                <li>
+                {{getPartName this}}
+                </li>
+            {{/each}}
+            </ul>
+        </td>
+        <td>
+            {{>partSelect month=this.month userId=this.userId}}
+            <!-- Single button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Zresetuj tajemnice<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" class="reset">Skasuj Tajemnice</a></li>
+                </ul>
+            </div>
         </td>
     </tr>
     {{/each}}
+    </tbody>
+    </table>
 
+    <table class="table table-striped">
+        <thead>
+        <th><b>Meldunki {{nextMonth}}</b></th>
+        </thead>
+        <tbody>
+        {{#each usersByNextMonth}}
+        <tr>
+            <td>
+                <h3>{{this.username}}</h3>
+
+                <ul>
+                    {{#each this.part}}
+                    <li>
+                        {{getPartName this}}
+                    </li>
+                    {{/each}}
+                </ul>
+            </td>
+            <td>
+                {{>partSelect month=this.month userId=this.userId}}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Zresetuj tajemnice<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="reset">Skasuj Tajemnice</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
+
+<template name="partSelectZ" >
+    <select class="partSelect"  month="{{month}}" userId="{{userId}}">
+        <option value="">Select</option>
+        <option value="0">{{getPartName 0}}</option>
+        <option value="1">{{getPartName 1}}</option>
+        <option value="2">{{getPartName 2}}</option>
+        <option value="3">{{getPartName 3}}</option>
+        <option value="4">{{getPartName 4}}</option>
+        <option value="5">{{getPartName 5}}</option>
+        <option value="6">{{getPartName 6}}</option>
+        <option value="7">{{getPartName 7}}</option>
+        <option value="8">{{getPartName 8}}</option>
+        <option value="9">{{getPartName 9}}</option>
+        <option value="10">{{getPartName 10}}</option>
+        <option value="11">{{getPartName 11}}</option>
+        <option value="12">{{getPartName 12}}</option>
+        <option value="13">{{getPartName 13}}</option>
+        <option value="14">{{getPartName 14}}</option>
+        <option value="15">{{getPartName 15}}</option>
+        <option value="16">{{getPartName 16}}</option>
+        <option value="17">{{getPartName 17}}</option>
+        <option value="18">{{getPartName 18}}</option>
+        <option value="19">{{getPartName 19}}</option>
+        <option value="20">{{getPartName 20}}</option>
+    </select>
+</template>
+
+    <template name="partSelect">
+        <div class="dropdown ">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Tajemnice...
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu partSelect" aria-labelledby="dropdownMenu1"  month="{{month}}" userId="{{userId}}">
+                <li><a href="#" id="0">{{getPartName 0}}</a></li>
+                <li><a href="#" id="1">{{getPartName 1}}</a></li>
+                <li><a href="#" id="2">{{getPartName 2}}</a></li>
+                <li><a href="#" id="3">{{getPartName 3}}</a></li>
+                <li><a href="#" id="4">{{getPartName 4}}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="5">{{getPartName 5}}</a></li>
+                <li><a href="#" id="6">{{getPartName 6}}</a></li>
+                <li><a href="#" id="7">{{getPartName 7}}</a></li>
+                <li><a href="#" id="8">{{getPartName 8}}</a></li>
+                <li><a href="#" id="9">{{getPartName 9}}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="10">{{getPartName 10}}</a></li>
+                <li><a href="#" id="11">{{getPartName 11}}</a></li>
+                <li><a href="#" id="12">{{getPartName 12}}</a></li>
+                <li><a href="#" id="13">{{getPartName 13}}</a></li>
+                <li><a href="#" id="14">{{getPartName 14}}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="15">{{getPartName 15}}</a></li>
+                <li><a href="#" id="16">{{getPartName 16}}</a></li>
+                <li><a href="#" id="17">{{getPartName 17}}</a></li>
+                <li><a href="#" id="19">{{getPartName 18}}</a></li>
+                <li><a href="#" id="20">{{getPartName 19}}</a></li>
+            </ul>
+        </div>
 </template>

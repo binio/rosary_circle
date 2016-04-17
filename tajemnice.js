@@ -27,6 +27,10 @@ if (Meteor.isClient) {
                 tajemnica.registeredCurrentMonth = PrzydzialyCollection.find({month:currMonthNum,year:currYearNum});
             }
             return tajemnica;
+        },
+        'getPartName':function(id){
+            var parts = MyApp.getPartsArray();
+            return parts[id];
         }
     });
 
