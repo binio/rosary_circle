@@ -26,6 +26,12 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.usersByMonth.helpers({
+        'getUsersByMonth':function(month){
+            return PrzydzialyCollection.find({month:month});
+        }
+    });
+
     Template.enrollmentAdmin.events({
         'click .userSelect':function(event){
             var object = new Object();
@@ -44,7 +50,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
     Meteor.publish('users', function(options){
-        if(options.username == 'tomasz-tomasz' || options.username == 'metanoja'){
+        if(options.username == 'tomasz-tomasz' || options.username == 'malgosia'){
             return Meteor.users.find({$query:{}, $orderby:{username:1}});
         }
         else {

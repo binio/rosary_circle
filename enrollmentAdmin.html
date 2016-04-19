@@ -8,8 +8,13 @@
             <!--{{#each users}}-->
             <!--{{this.username}}-->
             <!--{{/each}}-->
+            Użytkownicy na <b>{{currentMonth}}</b>
             {{>usersSelect month=getCurrentMonth}}
+            {{>usersByMonth month=getCurrentMonth}}
+
+            Użytkownicy na <b>{{nextMonth}}</b>
             {{>usersSelect month=getNextMonth}}
+            {{>usersByMonth month=getNextMonth}}
         </div>
 
     </div>
@@ -31,4 +36,11 @@
         </ul>
     </div>
 
+</template>
+<template name="usersByMonth">
+    <ul>
+        {{#each getUsersByMonth month}}
+        <li>{{username}}</li>
+        {{/each}}
+    </ul>
 </template>

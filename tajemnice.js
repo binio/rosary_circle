@@ -40,6 +40,7 @@ if (Meteor.isClient) {
             var yearNum = moment().add(1, 'months').endOf('month').year();
             Meteor.call('joinMonth',{
                 username:Meteor.user().username,
+                userId:Meteor.user()._id,
                 month:monthNum,
                 year:yearNum
             });
