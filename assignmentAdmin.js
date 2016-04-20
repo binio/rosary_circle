@@ -44,12 +44,12 @@ if (Meteor.isClient) {
     Template.assignmentAdmin.events({
 
         'click .partSelect':function(event){
-            console.log(this.userId, event.target.id,this.month);
+            //console.log(this.userId, event.target.id,this.month);
             Meteor.call('updateAssignmet',this.userId,this.month,event.target.id);
         },
         'click .reset':function(event){
             Meteor.call('resetAssignment',this.userId,this.month);
-            console.log('reset',this.userId,this.month);
+            //console.log('reset',this.userId,this.month);
         }
     });
 
