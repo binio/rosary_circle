@@ -18,13 +18,5 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-    Meteor.publish('users', function(options){
-        if(options.username == 'tomasz-tomasz' || options.username == 'metanoja'){
-            return Meteor.users.find({$query:{}, $orderby:{username:1}});
-        }
-        else {
-            return Meteor.users.find({username:"xxxx"});
-        }
-        });
 
 }
