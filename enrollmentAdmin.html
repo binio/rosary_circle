@@ -40,7 +40,8 @@
 <template name="usersByMonth">
     <ul>
         {{#each getUsersByMonth month}}
-        <li>{{username}}</li>
+        <li><span class="glyphicon glyphicon-trash unenroll">  </span>{{username}}</li>
         {{/each}}
     </ul>
+    <hr>
 </template>
