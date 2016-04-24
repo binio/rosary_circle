@@ -22,7 +22,7 @@ if (Meteor.isClient) {
 
     Template.usersSelect.helpers({
         'users':function(){
-            return {users:UsersCollection.find({})};
+                return {users: UsersCollection.find({})};
         }
     });
 
@@ -42,7 +42,10 @@ if (Meteor.isClient) {
                 object.year = moment().add(1, 'months').endOf('month').year();
 
             Meteor.call('enroll', object);
-            console.log(event.target.id, this.month);
+            //console.log(event.target.id, this.month);
+        },
+        'click .unenroll':function(event){
+            Meteor.call('unenroll', this._id);
         }
     });
 }
@@ -50,7 +53,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
     Meteor.publish('users', function(options){
-        if(options.username == 'tomasz-tomasz' || options.username == 'malgosia'){
+        if(this.userId && Roles.userIsInRole(this.userId,['admin'], 'group-1')){
             return Meteor.users.find({$query:{}, $orderby:{username:1}});
         }
         else {
@@ -63,6 +66,9 @@ if (Meteor.isServer) {
         },
         'enroll':function(object){
             PrzydzialyCollection.insert(object);
+        },
+        'unenroll':function(id){
+            PrzydzialyCollection.remove({_id:id});
         }
     });
 }
