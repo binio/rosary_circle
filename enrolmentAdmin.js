@@ -32,6 +32,12 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.rosaryParts.helpers({
+        'getRosaryParts':function(){
+            return MyApp.getPartsArray();
+        }
+    });
+
     Template.enrollmentAdmin.events({
         'click .userSelect':function(event){
             var object = new Object();
