@@ -5,6 +5,7 @@
                 Tutaj mozesz przypisac tajemnice do użytkowników na <b>{{nextMonth}}</b>.
                 oraz na <b>{{currentMonth}}</b>.
             </div>
+            {{>rosaryParts}}
             {{>assignmentList}}
         </div>
     </div>
@@ -141,4 +142,25 @@
                 <li><a href="#" id="19">{{getPartName 19}}</a></li>
             </ul>
         </div>
+</template>
+
+<template name="rosaryParts">
+    <ul>
+        {{#each getRosaryParts}}
+        <li>{{@index}}{{this}}{{>userSelect}}</li>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="userSelect">
+    <div class="dropdown ">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Tajemnice...
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu " aria-labelledby="dropdownMenu1">
+        <li><a href="#" id="0">aaa</a></li>
+        <li><a href="#" id="1">bbb</a></li>
+    </ul>
+    </div>
 </template>

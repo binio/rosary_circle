@@ -8,6 +8,10 @@
             <!--{{#each users}}-->
             <!--{{this.username}}-->
             <!--{{/each}}-->
+            Użytkownicy na <b>{{currentMonth}}</b>
+            {{>rosaryParts}}
+
+            Użytkownicy na <b>{{nextMonth}}</b>
             {{>rosaryParts}}
 
             Użytkownicy na <b>{{currentMonth}}</b>
@@ -50,7 +54,7 @@
 <template name="rosaryParts">
     <ul>
         {{#each getRosaryParts}}
-        <li>{{@index}}{{this}}</li>
+        <li>{{this}}</li>
         {{/each}}
     </ul>
 </template>
