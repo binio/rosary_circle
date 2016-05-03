@@ -5,7 +5,7 @@
                 Tutaj mozesz przypisac tajemnice do użytkowników na <b>{{nextMonth}}</b>.
                 oraz na <b>{{currentMonth}}</b>.
             </div>
-            {{>rosaryParts}}
+            {{>rosaryParts month=currentMonth}}
             {{>assignmentList}}
         </div>
     </div>
@@ -145,22 +145,42 @@
 </template>
 
 <template name="rosaryParts">
-    <ul>
+    <table class="table ">
+        <thead>
+            <th>No.</th>
+            <th>Tajemnice</th>
+            <th>Użytkownicy</th>
+        </thead>
+        <tbody>
         {{#each getRosaryParts}}
-        <li>{{@index}}{{this}}{{>userSelect}}</li>
+        <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{this}}{{>whichPerson tj=@index}}</td>
+            <td userId="{{@index}}">{{>userSelect userId=@index month=currentMonthNum}}</td>
+        </tr>
         {{/each}}
-    </ul>
+        </tbody>
+    </table>
+</template>
+
+<template name="whichPerson">
+    <b>
+[{{#each whichUser tj}}
+    {{this.username}}
+    {{/each}}]
+    </b>
 </template>
 
 <template name="userSelect">
     <div class="dropdown ">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Tajemnice...
+        Użytkownicy...
         <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu " aria-labelledby="dropdownMenu1">
-        <li><a href="#" id="0">aaa</a></li>
-        <li><a href="#" id="1">bbb</a></li>
+    <ul class="dropdown-menu userSelect" aria-labelledby="dropdownMenu1">
+        {{#each allUsers}}
+        <li><a href="#" id="{{this._id}}" userId="{{this._id}}" month={{month}}>{{month}}{{username}}</a></li>
+        {{/each}}
     </ul>
     </div>
 </template>
