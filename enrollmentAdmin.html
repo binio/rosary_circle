@@ -12,7 +12,7 @@
             {{>rosaryParts}}
 
             Użytkownicy na <b>{{nextMonth}}</b>
-            {{>rosaryParts}}
+            {{>rosaryPartsx}}
 
             Użytkownicy na <b>{{currentMonth}}</b>
             {{>usersSelect month=getCurrentMonth}}
@@ -51,7 +51,7 @@
     </ul>
     <hr>
 </template>
-<template name="rosaryParts">
+<template name="rosaryPartsx">
     <ul>
         {{#each getRosaryParts}}
         <li>{{this}}</li>
