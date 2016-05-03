@@ -41,15 +41,36 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.userSelect.helpers({
+        'allUsers':function(id){
+            return UsersCollection.find({});
+        }
+    });
+
     Template.assignmentAdmin.events({
 
         'click .partSelect':function(event){
-            //console.log(this.userId, event.target.id,this.month);
+            console.log(this.userId,this.month,event.target.id);
             Meteor.call('updateAssignmet',this.userId,this.month,event.target.id);
         },
         'click .reset':function(event){
             Meteor.call('resetAssignment',this.userId,this.month);
             //console.log('reset',this.userId,this.month);
+        }
+    });
+
+    Template.rosaryParts.events({
+        'click .userSelect':function(event){
+            Meteor.call('updateAssignmet',event.target.id, this.month, this.userId);
+            console.log( event.target.id, this.month, this.userId);
+        }
+    });
+    Template.whichPerson.helpers({
+        'whichUser':function(tj){
+            console.log(tj);
+            return PrzydzialyCollection.find(
+                {part:{$in:[tj]},month:4,year:2016},{username:1,_id:0 }
+            );
         }
     });
 
@@ -75,6 +96,7 @@ if (Meteor.isServer) {
             PrzydzialyCollection.update(
                 {userId:userId, month:month},{$set:{part:[]}},{upsert:true}
             );
-        }
+        },
+
     });
 }
