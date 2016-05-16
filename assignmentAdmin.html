@@ -5,8 +5,12 @@
                 Tutaj mozesz przypisac tajemnice do użytkowników na <b>{{nextMonth}}</b>.
                 oraz na <b>{{currentMonth}}</b>.
             </div>
-            {{>rosaryParts month=currentMonth}}
-            {{>assignmentList}}
+            <h2>Przydziały na {{currentMonth}}</h2>
+            {{>rosaryParts month=currentMonthNum}}
+
+            <h2>Przydziały na {{nextMonth}}</h2>
+            {{>rosaryParts month=nextMonthNum}}
+
         </div>
     </div>
 </template>
@@ -155,8 +159,8 @@
         {{#each getRosaryParts}}
         <tr>
             <th scope="row">{{@index}}</th>
-            <td>{{this}}{{>whichPerson tj=@index}}</td>
-            <td userId="{{@index}}">{{>userSelect userId=@index month=currentMonthNum}}</td>
+            <td><b>{{this}}</b>{{>whichPerson tj=@index month=../month}}</td>
+            <td userId="{{@index}}">{{>userSelect userId=@index month=../month}}</td>
         </tr>
         {{/each}}
         </tbody>
@@ -164,11 +168,11 @@
 </template>
 
 <template name="whichPerson">
-    <b>
-[{{#each whichUser tj}}
-    {{this.username}}
-    {{/each}}]
-    </b>
+    <ul>
+{{#each whichUser tj month}}
+        <li><button type="button" class="btn btn-default btn-xs" userId="{{this.userId}}"><a href="#"><span class="glyphicon glyphicon-remove removeUser" userId="{{this.userId}}" id="{{../tj}}"></span></a></button>{{this.username}}</li>
+    {{/each}}
+    </ul>
 </template>
 
 <template name="userSelect">
