@@ -182,8 +182,8 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu userSelect" aria-labelledby="dropdownMenu1">
-        {{#each allUsers}}
-        <li><a href="#" id="{{this._id}}" userId="{{this._id}}" month={{month}}>{{month}}{{username}}</a></li>
+        {{#each allUsersByMonth month}}
+        <li><a href="#"  id="{{userId}}" month={{month}}>{{username}}</a></li>
         {{/each}}
     </ul>
     </div>
