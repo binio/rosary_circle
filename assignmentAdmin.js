@@ -16,7 +16,6 @@ if (Meteor.isClient) {
             }).fetch().map(function(x) {
                 return x;
             }), true);
-            //console.log(PrzydzialyCollection.find({}));
             return distinctEntries;
         },
         'usersByNextMonth':function(){
@@ -44,34 +43,31 @@ if (Meteor.isClient) {
     Template.userSelect.helpers({
         'allUsers':function(id){
             return UsersCollection.find({});
+        },
+        'allUsersByMonth':function(month){
+            return PrzydzialyCollection.find({month:month, year:2016},{username:1});
         }
     });
 
     Template.assignmentAdmin.events({
 
         'click .partSelect':function(event){
-            console.log(this.userId,this.month,event.target.id);
             Meteor.call('updateAssignmet',this.userId,this.month,event.target.id);
         },
         'click .reset':function(event){
             Meteor.call('resetAssignment',this.userId,this.month);
-            //console.log('reset',this.userId,this.month);
         }
     });
 
     Template.rosaryParts.events({
         'click .userSelect':function(event){
             Meteor.call('updateAssignmet',event.target.id, this.month, this.userId.toString());
-            console.log( this);
-            console.log( event.target.id, this.month, this.userId);
         }
     });
 
     Template.whichPerson.events({
         'click .removeUser':function(event){
-            console.log(this.userId, this.month, event.target.id);
             Meteor.call('pullFromAssignmet',this.userId, this.month, event.target.id);
-            console.log(this);
         }
     });
     Template.whichPerson.helpers({
