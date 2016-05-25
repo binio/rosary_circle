@@ -3,7 +3,7 @@ PrzydzialyCollection = new Mongo.Collection("przydzialy");
 
 if (Meteor.isClient) {
   Accounts.ui.config({
-passwordSignupFields: 'USERNAME_ONLY'
+passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
   moment.locale('pl');
   accountsUIBootstrap3.setLanguage('pl'); // for Spanish
@@ -135,6 +135,10 @@ passwordSignupFields: 'USERNAME_ONLY'
         'click .wiadomosci':function(){
             //console.log('wiadomosci');
             deactivate('.wiadomosci');
+        },
+        'click .account':function(){
+            //console.log('wiadomosci');
+            deactivate('.account');
         },
     });
     

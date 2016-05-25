@@ -26,6 +26,7 @@
             {{#if currentUser}}
             <li class="tajemnice {{getActive '.tajemnice'}}"><a href="/about">Tajemnice</a></li>
             <li class="wiadomosci {{getActive '.wiadomosci'}}"><a href="/most">Most modlitewny</a></li>
+              <li class="account {{getActive '.account'}}"><a href="/account">Konto</a></li>
 
             {{/if}}
               <li><a href="#">{{>loginButtons }}</a></li>
@@ -37,7 +38,7 @@
                           <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                          <li><a href="/users">Urzytkownicy</a></li>
+                          <li><a href="/users">Użytkownicy</a></li>
                           <li><a href="/enrollments">Meldunki</a></li>
                           <li><a href="/assignments">Przydziały</a></li>
                           <li role="separator" class="divider"></li>

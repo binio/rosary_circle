@@ -6,6 +6,7 @@ Router.route('/users', { controller: 'UsersController' });
 Router.route('/bless', { controller: 'BlessController' });
 Router.route('/assignments',{controller:'AssignmentController'});
 Router.route('/enrollments',{controller:'EnrollmentController'});
+Router.route('/account',{controller:'AccountController'});
 Router.route('/user/:_id', function(){
     profile = UsersCollection.findOne({_id: this.params._id});
     this.render('userDetail', {
