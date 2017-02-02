@@ -183,7 +183,7 @@
     </button>
     <ul class="dropdown-menu userSelect" aria-labelledby="dropdownMenu1">
         {{#each allUsersByMonth month}}
-        <li><a href="#"  id="{{userId}}" month={{month}}>{{username}}</a></li>
+        <li class="{{#if part.length}}alert-info{{/if}}"><a href="#"  id="{{userId}}" month={{month}}>{{username}} ({{part.length}})</a></li>
         {{/each}}
     </ul>
     </div>
