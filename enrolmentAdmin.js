@@ -28,7 +28,8 @@ if (Meteor.isClient) {
 
     Template.usersByMonth.helpers({
         'getUsersByMonth':function(month){
-            return PrzydzialyCollection.find({month:month});
+            var currentYear = moment().subtract(0, 'years').endOf('month').year();
+            return PrzydzialyCollection.find({month:month, year:currentYear});
         }
     });
 
