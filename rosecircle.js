@@ -32,13 +32,14 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
 
         'intentionListNextMonth':function(){
             var nextMonth = moment().add(1, 'months').endOf('month').month();
-            var yearForNextMonth = moment().subtract(0, 'years').endOf('month').year();
+            var yearForNextMonth = moment().subtract(0, 'years').endOf('month').format("YYYY");
             return IntencjeCollection.find({month:nextMonth,user:Meteor.userId(),year:yearForNextMonth});
         },
 
         'usersByMonth':function(month){
             var currentMonth = month;
-            var distinctEntries = _.uniq(IntencjeCollection.find({month:currentMonth}, {
+            var yearForNextMonth = moment().subtract(0, 'years').endOf('month').format("YYYY");
+            var distinctEntries = _.uniq(IntencjeCollection.find({month:currentMonth,year:yearForNextMonth}, {
             sort: {username: 1}, fields: {username: true}
             }).fetch().map(function(x) {
                 return x.username;
@@ -47,7 +48,8 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
         },
 
         'intentionByUser':function(userName, month){
-            return IntencjeCollection.find({username:userName,month:month});
+            var yearForNextMonth = moment().subtract(0, 'years').endOf('month').format("YYYY");
+            return IntencjeCollection.find({username:userName,month:month,year:yearForNextMonth});
         },
 
         'currentMonth':function(){
@@ -207,8 +209,6 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
 
                 IntencjeCollection.insert(data);
 
-        },
-        'deleteLastYearIntention':function(year){
         }
     });
 
