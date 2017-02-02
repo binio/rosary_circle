@@ -32,7 +32,8 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
 
         'intentionListNextMonth':function(){
             var nextMonth = moment().add(1, 'months').endOf('month').month();
-            return IntencjeCollection.find({month:nextMonth,user:Meteor.userId()});
+            var yearForNextMonth = moment().subtract(0, 'years').endOf('month').year();
+            return IntencjeCollection.find({month:nextMonth,user:Meteor.userId(),year:yearForNextMonth});
         },
 
         'usersByMonth':function(month){
@@ -206,6 +207,8 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
 
                 IntencjeCollection.insert(data);
 
+        },
+        'deleteLastYearIntention':function(year){
         }
     });
 
