@@ -15,7 +15,7 @@
 
             Użytkownicy na <b>{{nextMonth}}</b>
             {{>usersSelect month=getNextMonth}}
-            {{>usersByMonth month=getNextMonth}}
+            {{>usersByNextMonth month=getNextMonth}}
         </div>
 
     </div>
@@ -41,6 +41,14 @@
 <template name="usersByMonth">
     <ul>
         {{#each getUsersByMonth month}}
+        <li><span class="glyphicon glyphicon-trash unenroll">  </span>{{username}}</li>
+        {{/each}}
+    </ul>
+    <hr>
+</template>
+<template name="usersByNextMonth">
+    <ul>
+        {{#each getUsersByNextMonth month}}
         <li><span class="glyphicon glyphicon-trash unenroll">  </span>{{username}}</li>
         {{/each}}
     </ul>
