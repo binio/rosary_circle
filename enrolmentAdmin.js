@@ -32,6 +32,13 @@ if (Meteor.isClient) {
             return PrzydzialyCollection.find({month:month, year:currentYear});
         }
     });
+    
+    Template.usersByNextMonth.helpers({
+        'getUsersByNextMonth':function(month){
+            var currentYear = moment().add(1, 'month').endOf('month').year();
+            return PrzydzialyCollection.find({month:month, year:currentYear});
+        }
+    });
 
     Template.rosaryParts.helpers({
         'getRosaryParts':function(){
