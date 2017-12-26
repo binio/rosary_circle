@@ -45,10 +45,9 @@ if (Meteor.isClient) {
             return UsersCollection.find({});
         },
         'allUsersByMonth':function(month){
-            return PrzydzialyCollection.find({month:month, year:2017},{username:1,part:1});
+            return PrzydzialyCollection.find({month:0, year:2018},{username:1,part:1});
         }
     });
-
     Template.assignmentAdmin.events({
 
         'click .partSelect':function(event){
@@ -74,7 +73,7 @@ if (Meteor.isClient) {
         'whichUser':function(tj,month){
             var tj = tj.toString();
             return PrzydzialyCollection.find(
-                {part:{$in:[tj]},month:month,year:2017},{username:1,_id:0 }
+                {part:{$in:[tj]},month:month,year:2018},{username:1,_id:0 }
             );
         }
     });
