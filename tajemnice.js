@@ -12,7 +12,8 @@ if (Meteor.isClient) {
 
                 tajemnica.joinNextMonth = PrzydzialyCollection.find({
                     username:Meteor.user().username,
-                    month:monthNum
+                    month:monthNum,
+                    year:yearNum
                 }).count();
 
                 if(tajemnica.joinNextMonth != 0){
