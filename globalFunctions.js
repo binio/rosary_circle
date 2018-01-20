@@ -12,6 +12,10 @@ MyApp = (function(){
     api.yearNextMonth = function(){
         return moment().add(1, 'months').endOf('month').format("YYYY");
     };
+    
+    api.yearThisMonth = function(){
+        return moment().add(0, 'months').endOf('month').format("YYYY");
+    };
 
     api.currentMonthName = function(){
         return moment().endOf('month').format('MMMM');
