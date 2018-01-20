@@ -188,6 +188,17 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
             $('a.allByUser').parent().addClass('active');
             //console.log("All By User");
         },
+        
+        'click .copyIntentions':function(){
+            console.log('copy intentions');
+            console.log('userId: ', Meteor.userId());
+            console.log('userName: ', Meteor.user().username);
+            console.log('monthNum: ', MyApp.currentMonth());
+            console.log('yearNum: ', MyApp.yearThisMonth());
+            
+            Meteor.call('copyIntentions', Meteor.user().username, 3, 2016);
+    
+        }
     });
 
     Meteor.methods({
@@ -275,6 +286,16 @@ var users = ["brandeisbluesky",
 
                 IntencjeCollection.insert(data);
 
+        },
+        'copyIntentions':function(username, monthNum, yearNum){
+            var intencje = IntencjeCollection.find({
+                "username":username
+            },{"name":1});
+            console.log(intencje.count());
+            for(i = 0; i < intencje.length; i++){
+                console.log(intencje[i]);
+            }
+            
         }
     });
     // code to run on server at startup
