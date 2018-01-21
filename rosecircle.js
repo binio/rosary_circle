@@ -78,7 +78,7 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
                         Session.set('nextMonthBlessing',result);
                         });
             return Session.get('nextMonthBlessing');
-        },
+        }
     });
     
     Template.header.helpers({
@@ -196,8 +196,18 @@ passwordSignupFields: 'USERNAME_AND_EMAIL'
             console.log('monthNum: ', MyApp.currentMonth());
             console.log('yearNum: ', MyApp.yearThisMonth());
             
-            Meteor.call('copyIntentions', Meteor.user().username, 3, 2016);
-    
+            const intencje = IntencjeCollection.find({"username":Meteor.user().username, "month":0, "year":"2018"},{"name":1}).fetch();
+            console.log(intencje);
+            for(i=0; i<intencje.length; i++){
+                console.log(intencje[i].name);
+                Meteor.call('addIntention',{
+                    name:intencje[i].name,
+                    month:1,
+                    year:"2018",
+                    user:Meteor.userId(),
+                    username:Meteor.user().username});
+            }
+            
         }
     });
 
@@ -288,13 +298,10 @@ var users = ["brandeisbluesky",
 
         },
         'copyIntentions':function(username, monthNum, yearNum){
-            var intencje = IntencjeCollection.find({
+            console.log(username);
+            return IntencjeCollection.find({
                 "username":username
-            },{"name":1});
-            console.log(intencje.count());
-            for(i = 0; i < intencje.length; i++){
-                console.log(intencje[i]);
-            }
+            },{"name":1}).fetch();
             
         }
     });
