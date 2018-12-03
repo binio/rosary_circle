@@ -45,7 +45,8 @@ if (Meteor.isClient) {
             return UsersCollection.find({});
         },
         'allUsersByMonth':function(month){
-            return PrzydzialyCollection.find({month:month, year:2018},{username:1,part:1,year:1});
+            var yearNexMonth = moment().add(1, 'month').endOf('month').year();
+            return PrzydzialyCollection.find({month:month, year:yearNexMonth},{username:1,part:1,year:1});
         }
     });
     Template.assignmentAdmin.events({
