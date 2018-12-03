@@ -74,7 +74,7 @@ if (Meteor.isClient) {
         'whichUser':function(tj,month){
             var tj = tj.toString();
             return PrzydzialyCollection.find(
-                {part:{$in:[tj]},month:month,year:2018},{username:1,_id:0 }
+                {part:{$in:[tj]},month:month,year:2019},{username:1,_id:0 }
             );
         }
     });
